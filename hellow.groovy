@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.util.Date;
 class FTage {
     enum eFTage {
             Neujahr(0),             /* FIX    */
@@ -50,6 +52,21 @@ class FTage {
                   "Oktober",
                   "November",
                   "Dezember"]
+                  
+    def feiertage = [
+                  "Neujahr",
+                  "Erscheinungsfest",
+                  "Karfreitag",
+                  "Ostersonntag",
+                  "Ostermontag",
+                  "Maifeiertag",
+                  "ChrHimmelfahrt",
+                  "Pfingstmontag",
+                  "Fronleichnam",
+                  "MraHimmelfahrt",
+                  "DtEinheit",
+                  "Reformationstag",
+                  "Allerheiligen"]
     
     /* functions  */
     def initFTage() {
@@ -98,7 +115,7 @@ class FTage {
 
     def setFixFTage() {
         fTage[eFTage.Neujahr.value()].set(hourOfDay: 12, minute: 0, second: 0, year: currentYear, month: eMonate.Januar.value(), date: 1)
-        fTage[eFTage.Ercheinungsfest.value()].set(hourOfDay: 12, minute: 0, second: 0, year: currentYear, month: eMonate.Januar.value(), date: 6)
+        fTage[eFTage.Erscheinungsfest.value()].set(hourOfDay: 12, minute: 0, second: 0, year: currentYear, month: eMonate.Januar.value(), date: 6)
         fTage[eFTage.Maifeiertag.value()].set(hourOfDay: 12, minute: 0, second: 0, year: currentYear, month: eMonate.Mai.value(), date: 1)
         fTage[eFTage.MraHimmelfahrt.value()].set(hourOfDay: 12, minute: 0, second: 0, year: currentYear, month: eMonate.August.value(), date: 15)
         fTage[eFTage.DtEinheit.value()].set(hourOfDay: 12, minute: 0, second: 0, year: currentYear, month: eMonate.Oktober.value(), date: 3)
@@ -117,9 +134,17 @@ class FTage {
         fTage[eFTage.Fronleichnam.value()] = os+60
     }
 
+    def isFTag(testday) {
+        for(int i=0; i<15; i++) {
+          if(testday.clearTime() == fTage[i].clearTime())
+             return i
+        }
+        return -1
+    }
+
     def greet() { "${name}" }
     def getMonat(i) { monate[i] }
-    def getFTag(i) { "FTAG: ${fTage[i]} "  }
+    def getFTag(i) { "${feiertage[i]} ${fTage[i]}"  }
 
     /* variables */
     def name
@@ -136,6 +161,17 @@ println fTage.setOsterSonntag(2014)
 println fTage.getOsterSonntag()
 fTage.initFTage()
 fTage.setVarFTage()
+fTage.setFixFTage()
 println fTage.getFTag(2)
-//def testDate = new Date()
-//println fTage.isFTag(testDate)
+def testDate = new Date()
+testDate.set(hourOfDay: 12, minute: 0, second: 0, year: 2014, month: 10-1, date: 3)
+def ret = fTage.isFTag(testDate)
+if(ret != -1){
+  println "TESTDAY is FEIERTAG:"
+  println fTage.getFTag(ret)
+}
+else
+{
+  println "TESTDAY IS NOT A FEIERTAG"
+}
+
