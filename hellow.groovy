@@ -140,25 +140,25 @@ class FTage {
         return -1
     }
 
-    def greet() { "${name}" }
     def getMonat(i) { monate[i] }
     def getFTag(i) { "${feiertage[i]} ${fTage[i]}"  }
 
+    def init(year) {
+        currentYear = year
+        setOsterSonntag(currentYear)
+        initFTage()
+        setVarFTage()
+        setFixFTage()
+    }
+
     /* variables */
-    def name
     def fTage 
     def os
     def currentYear
 }//FTage    
 
 def fTage = new FTage()
-fTage.name = "German Feiertage"
-println fTage.greet()
-fTage.setOsterSonntag(2014)
-println fTage.getOsterSonntag()
-fTage.initFTage()
-fTage.setVarFTage()
-fTage.setFixFTage()
+fTage.init(2014)
 def testDate = new Date()
 testDate.set(hourOfDay: 12, minute: 0, second: 0, year: 2014, month: 10-1, date: 3)
 def ret = fTage.isFTag(testDate)
