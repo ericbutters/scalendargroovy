@@ -78,32 +78,32 @@ class FTage {
     def setOsterSonntag(uJahr){
         def osDay
         def osMonth
-        int a = uJahr % 19;
-        int b = uJahr %  4;
-        int c = uJahr %  7;
-        int k = uJahr / 100;
-        int q = k / 4;
-        int p = ((8 * k) + 13) / 25;
-        int Egz = (38 - (k - q) + p) % 30; // Die Jahrhundertepakte
-        int M = (53 - Egz) % 30;
-        int N = (4 + k - q) % 7;
-        int d = ((19 * a) + M) % 30;
-        int e = ((2 * b) + (4 * c) + (6 * d) + N) % 7;
+        int a = uJahr % 19
+        int b = uJahr %  4
+        int c = uJahr %  7
+        int k = uJahr / 100
+        int q = k / 4
+        int p = ((8 * k) + 13) / 25
+        int Egz = (38 - (k - q) + p) % 30 // Die Jahrhundertepakte
+        int M = (53 - Egz) % 30
+        int N = (4 + k - q) % 7
+        int d = ((19 * a) + M) % 30
+        int e = ((2 * b) + (4 * c) + (6 * d) + N) % 7
         // Ausrechnen des Ostertermins:
         if ((22 + d + e) <= 31)
         {
-          osDay = 22 + d + e;
-          osMonth = 3;
+          osDay = 22 + d + e
+          osMonth = 3
         }
         else
         {
-          osDay = d + e - 9;
-          osMonth = 4;
+          osDay = d + e - 9
+          osMonth = 4
           // Zwei Ausnahmen berücksichtigen:
           if (osDay == 26)
-            osDay = 19;
+            osDay = 19
           else if ((osDay == 25) && (d == 28) && (a > 10))
-            osDay = 18;
+            osDay = 18
         }
         currentYear = uJahr
         os = new Date()
