@@ -1,5 +1,3 @@
-import java.text.DateFormat;
-import java.util.Date;
 class FTage {
     enum eFTage {
             Neujahr(0),             /* FIX    */
