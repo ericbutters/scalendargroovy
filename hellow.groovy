@@ -64,7 +64,9 @@ class FTage {
                   "MraHimmelfahrt",
                   "DtEinheit",
                   "Reformationstag",
-                  "Allerheiligen"]
+                  "Allerheiligen",
+                  "Weihnacht1",
+                  "Weihnacht2"]
     
     /* functions  */
     def initFTage() {
@@ -160,7 +162,7 @@ class FTage {
 def fTage = new FTage()
 fTage.init(2014)
 def testDate = new Date()
-testDate.set(hourOfDay: 12, minute: 0, second: 0, year: 2014, month: 10-1, date: 3)
+testDate.set(hourOfDay: 12, minute: 0, second: 0, year: 2014, month: 12-1, date: 25)
 def ret = fTage.isFTag(testDate)
 if(ret != -1){
   println "TESTDAY is FEIERTAG:"
